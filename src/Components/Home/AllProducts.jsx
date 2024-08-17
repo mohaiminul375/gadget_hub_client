@@ -98,7 +98,7 @@ const pages = [...Array(numberOfPages).keys()].map((e) => e + 1);
         <div className="">
           <h2 className="text-center text-4xl font-extrabold">All Products</h2>
         </div>
-        <div className="grid md:grid-cols-3 gap-4 mt-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
           {products.map((product) => (
             <ProductCard key={product._id} product={product}></ProductCard>
           ))}
