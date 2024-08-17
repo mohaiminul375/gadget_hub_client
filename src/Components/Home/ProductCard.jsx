@@ -1,5 +1,4 @@
 const ProductCard = ({product}) => {
-    console.log(product)
     const {name,image,description,brand,category,price,ratings}=product;
   return (
     <div className="card bg-base-100 w-96 shadow-xl border border-gray-700">
