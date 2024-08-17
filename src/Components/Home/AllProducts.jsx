@@ -30,7 +30,7 @@ const pages = [...Array(numberOfPages).keys()].map((e) => e + 1);
   // load data from server
   useEffect(() => {
     fetch(
-      `http://localhost:3000/products?page=${currentPg}&size=${itemPerPg}&name=${search}&sort_date=${date}&sort_price=${price}`
+      `https://gadget-hub-server-seven.vercel.app/products?page=${currentPg}&size=${itemPerPg}&name=${search}&sort_date=${date}&sort_price=${price}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -41,7 +41,7 @@ const pages = [...Array(numberOfPages).keys()].map((e) => e + 1);
 
  //load data for manage pagination
  useEffect(()=>{
-  fetch(`http://localhost:3000/products?name=${search}&sort_date=${date}&sort_price=${price}`)
+  fetch(`https://gadget-hub-server-seven.vercel.app/products?name=${search}&sort_date=${date}&sort_price=${price}`)
   .then(res=>res.json())
   .then(data=>setCount(data.length))
  },[search,date,price])
