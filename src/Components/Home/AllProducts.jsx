@@ -21,10 +21,10 @@ const AllProducts = () => {
 
   // load data from server
   useEffect(() => {
-    fetch(`http://localhost:3000/products`)
+    fetch(`http://localhost:3000/products?name=${search}&sort_date=${date}&sort_price=${price}`)
       .then((res) => res.json())
       .then((data) => setProducts(data));
-  }, []);
+  }, [search,date,price]);
   return (
     <section className="mt-10">
       {/* search and filtering */}
@@ -54,8 +54,8 @@ const AllProducts = () => {
           <option disabled selected>
             Price
           </option>
-          <option>Low to Hight</option>
-          <option>Hight to Low</option>
+          <option value='low_to_high'>Low to High</option>
+          <option value='high_to_low'>Hight to Low</option>
         </select>
         {/* date */}
         <select
@@ -66,8 +66,8 @@ const AllProducts = () => {
           <option disabled selected>
             Sorting Date
           </option>
-          <option>Newest First</option>
-          <option>Older First</option>
+          <option value='newest_first'>Newest First</option>
+          <option value='older_first'>Older First</option>
         </select>
       </section>
 

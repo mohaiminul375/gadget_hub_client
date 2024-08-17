@@ -1,5 +1,6 @@
 const ProductCard = ({product}) => {
-    const {name,image,description,brand,category,price,ratings}=product;
+    const {name,image,description,brand,category,price,ratings,createdAt}=product;
+    console.log(createdAt)
   return (
     <div className="card bg-base-100 w-96 shadow-xl border border-gray-700">
       <figure>
@@ -16,6 +17,7 @@ const ProductCard = ({product}) => {
             <p>Brand: {brand}</p>
             <p>category: {category}</p>
             <p>Price: ${price}</p>
+            <p>Posted Date: {createdAt.slice(0,10)}</p>
         </div>
       </div>
     </div>
