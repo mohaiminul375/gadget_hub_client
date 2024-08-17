@@ -34,14 +34,14 @@ const Login = () => {
 const handleGoogleLogin = () => {
     googleLogIn()
       .then((result) => {
-        toast.success('login successfully')
+        toast.success('login successfully');
         console.log(result);
         setTimeout(() => {
           navigate("/");
         }, 1000);
       })
       .catch((error) => {
-        console.log(error);
+        setError(error);
       });
   };
   // remover error

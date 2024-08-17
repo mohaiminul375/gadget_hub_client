@@ -1,8 +1,11 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
+import { FaRegCircleXmark } from "react-icons/fa6";
+import toast, { Toaster } from "react-hot-toast";
 
 const Register = () => {
+  const [error,setError]=useState('');
   const { createUser, googleLogIn } = useContext(AuthContext);
   const navigate = useNavigate();
   // submit
@@ -14,19 +17,25 @@ const Register = () => {
     // register
     createUser(email, password)
       .then((result) => {
+        toast.success('register successfully')
         console.log(result);
         setTimeout(() => {
           navigate("/");
         }, 1000);
       })
       .catch((error) => {
-        console.log(error);
+        if (error?.message == "Firebase: Error (auth/email-already-in-use).") {
+          setError("Already have an account on this user");
+        } else {
+          setError(error?.message);
+        }
       });
   };
 // google login
   const handleGoogleLogin = () => {
     googleLogIn()
       .then((result) => {
+        toast.success('Login successfully')
         console.log(result);
         setTimeout(() => {
           navigate("/");
@@ -36,13 +45,18 @@ const Register = () => {
         console.log(error);
       });
   };
+
+    // remover error
+    const handleRemoverError=()=>{
+      setError('')
+    }
   return (
     <section className="pt-20">
       <div className="w-full max-w-sm mx-auto bg-[#4A249D] rounded-lg shadow-2xl p-6 mt-12">
         <h2 className="text-center text-3xl font-bold text-[#55E6A5]">
           Register
         </h2>
-        {/* {error && (
+        {error && (
          <p className="text-center my-3 text-base font-semibold text-red-600 flex items-center gap-2 justify-center">
            {error}
            <FaRegCircleXmark
@@ -50,7 +64,7 @@ const Register = () => {
              onClick={handleRemoverError}
            />
          </p>
-       )} */}
+       )}
         <form onSubmit={handleSubmit} className="mt-6">
           <div className="form-control">
             <label className="label">
@@ -122,6 +136,10 @@ const Register = () => {
           </Link>
         </p>
       </div>
+      <Toaster
+  position="top-center"
+  reverseOrder={false}
+/>
     </section>
   );
 };
